@@ -1,1 +1,1 @@
-# hawking-bros-course-project
+# Hawking Bros Курсовая работа

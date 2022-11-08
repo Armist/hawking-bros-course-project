@@ -16,6 +16,6 @@
 	},
 	"plugins": ["react"],
 	"rules": {
-		"@typescript-eslint/no-unsafe-assignment": false
+		"@typescript-eslint/no-unsafe-assignment": 0
 	}
 }

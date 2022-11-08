@@ -1,4 +1,6 @@
-import {IconType} from '../../types';
+import React from 'react';
+
+import type {IconType} from '../../types';
 
 export const MapIcon = ({width, height, fill}: IconType) => {
 	return (

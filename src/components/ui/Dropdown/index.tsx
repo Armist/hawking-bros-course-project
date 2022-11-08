@@ -2,30 +2,32 @@ import React from 'react';
 
 import './Dropdown.scss';
 
-type DropdownProps = {
-	children: React.ReactNode;
-	isShown: boolean;
-	onMouseLeave: () => void;
-};
+// DropdownItem
 
 type DropdownItemProps = {
 	children: React.ReactNode | React.ReactNode[] | string;
 	onClick: () => void;
-	padding?: string
+	padding?: string;
 };
 
 export const DropdownItem: React.FC<DropdownItemProps> = ({
 	children,
 	onClick,
-	padding
+	padding,
 }) => {
 	return (
-		<li className="dropdown__item" onClick={onClick}
-			style={{padding: padding}}
-		>
+		<li className="dropdown__item" onClick={onClick} style={{padding: padding}}>
 			{children}
 		</li>
 	);
+};
+
+// Dropdown
+
+type DropdownProps = {
+	children: React.ReactNode;
+	isShown: boolean;
+	onMouseLeave: () => void;
 };
 
 export const Dropdown: React.FC<DropdownProps> = ({

@@ -1,6 +1,8 @@
+import React from 'react';
+
 import {useNavigation} from 'react-router-dom';
 import {MapIcon} from '../assets/svg/MapIcon';
-import {LinkType} from '../types';
+import type {LinkType} from '../types';
 
 export const topNavigationItems: LinkType[] = [
 	{

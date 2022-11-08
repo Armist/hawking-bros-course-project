@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import React, {useState} from 'react';
 import {Container} from '../Container';
 import {Logo} from '../ui/Logo';
@@ -6,11 +7,12 @@ import {Button} from '../ui/Button';
 import {LinkType} from '../../types';
 
 import './Header.scss';
-import {MapIcon} from '../../assets/svg/MapIcon';
-import {Link, Location, useLocation} from 'react-router-dom';
+import type {Location} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import {Dropdown, DropdownItem} from '../ui/Dropdown';
 
 import {topNavigationItems, bottomNavigationItems} from '../../data/NavData';
+import {NavigationItem} from './NavigationList/index';
 
 export const Header = () => {
 	const [droppable, setDroppable] = useState(false);
@@ -44,7 +46,7 @@ export const Header = () => {
 					<div className="top-navigation__inner">
 						<NavigationList listClass="top-navigation__left">
 							{topNavigationItems.map((item) => (
-								<li
+								<NavigationItem
 									className={`top-navigation__left-item ${
 										item.iconPosition ? item.iconPosition + '-icon' : ''
 									}`}
@@ -63,7 +65,7 @@ export const Header = () => {
 												: ''
 											: ''}
 									</Link>
-								</li>
+								</NavigationItem>
 							))}
 						</NavigationList>
 
@@ -85,11 +87,11 @@ export const Header = () => {
 
 						<NavigationList listClass="bottom-navigation__list">
 							{bottomNavigationItems.map((item) => (
-								<li
+								<NavigationItem
 									className={`bottom-navigation__list-item ${
 										item.iconPosition ? item.iconPosition + '-icon' : ''
 									}`}
-									style={{position: item.dropdownItems ? 'relative' : 'unset'}}
+									isRelative={Boolean(item.dropdownItems)}
 									key={item.text}
 								>
 									{!item.dropdownItems ? (
@@ -143,7 +145,7 @@ export const Header = () => {
 											</Dropdown>
 										</>
 									)}
-								</li>
+								</NavigationItem>
 							))}
 						</NavigationList>
 

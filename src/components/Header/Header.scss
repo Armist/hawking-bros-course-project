@@ -1,0 +1,162 @@
+.top-navigation,
+.bottom-navigation {
+	padding: 11px 0;
+	font-size: 14px;
+}
+
+.top-navigation {
+	color: var(--text-gray);
+	background-color: var(--bg-light-gray);
+}
+
+.top-navigation__left,
+.top-navigation__right {
+	@include flex-h-center;
+}
+
+.top-navigation__left-item {
+	a {
+		display: flex;
+		align-items: center;
+
+		a:hover {
+			svg {
+				color: var(--yellow);
+			}
+		}
+	}
+
+	&:not(:last-child) {
+		margin-right: 57px;
+	}
+}
+
+.left-icon {
+	svg {
+		transition: var(--transition);
+		margin-right: 5px;
+	}
+}
+
+.right-icon {
+	svg {
+		transition: var(--transition);
+		margin-left: 15px;
+	}
+}
+
+.top-navigation__right-item {
+	a {
+		font-weight: 500;
+	}
+	&:not(:last-child) {
+		margin-right: 40px;
+	}
+
+	&:last-child {
+		a {
+			color: var(--text-violet);
+		}
+	}
+}
+
+.top-navigation__left-item,
+.top-navigation__right-item {
+	@include font(m);
+	a {
+		transition: var(--transition);
+
+		&:hover {
+			color: var(--yellow);
+		}
+	}
+}
+
+.top-navigation__inner,
+.bottom-navigation__inner {
+	@include flex-all-sb;
+}
+
+.bottom-navigation {
+	color: var(--text-black);
+	background-color: var(--bg-white);
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+
+	&__list {
+		display: flex;
+		flex-direction: row;
+	}
+}
+
+.bottom-navigation__list-item {
+	font-weight: 600;
+	@include font(m);
+
+	&:not(:last-child) {
+		margin-right: 80px;
+	}
+}
+
+.item-link {
+	cursor: pointer;
+	user-select: none;
+	position: relative;
+	display: flex;
+	align-items: center;
+
+	&::after {
+		position: absolute;
+		bottom: -21px;
+		left: 0;
+		content: '';
+		height: 3px;
+		width: 0;
+		background-color: var(--yellow);
+		transition: var(--transition);
+	}
+
+	&-hovered,
+	&:hover {
+		svg {
+			color: var(--yellow);
+		}
+		&::after {
+			width: 100%;
+		}
+	}
+}
+
+.bottom-navigation__button {
+	@include flex-all-center;
+	@include font(m);
+	transition: var(--transition);
+	position: relative;
+	z-index: 1;
+
+	span {
+		text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+	}
+
+	&::after {
+		position: absolute;
+		content: '';
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: linear-gradient(90deg, #867cfc 0%, #6929f3 94.5%);
+		border-radius: 18px;
+		z-index: -1;
+		transition: var(--transition);
+		opacity: 0;
+	}
+
+	&:hover::after {
+		opacity: 1;
+	}
+}

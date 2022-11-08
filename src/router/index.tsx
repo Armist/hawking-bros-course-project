@@ -1,8 +1,8 @@
 import React from 'react';
 import {createBrowserRouter} from 'react-router-dom';
 import {Container} from '../components/Container';
-import {MainPage} from '../pages/Main';
-import {DefaultLayout} from './layouts';
+import {MainPage} from '../pages/MainPage';
+import {DefaultLayout} from './layouts/DefaultLayout';
 
 export const router = createBrowserRouter([
 	{

@@ -9,7 +9,7 @@
 }
 
 body {
-	font-family: 'Inter';
+	font-family: var(--font-family);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	height: 100vh;
@@ -18,4 +18,26 @@ body {
 
 #root {
 	height: 100%;
+}
+
+img {
+	width: 100%;
+	height: auto;
+	vertical-align: bottom;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+button {
+	border: 0;
+	background-color: inherit;
+	transition: var(--transition);
+	cursor: pointer;
 }

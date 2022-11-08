@@ -16,6 +16,8 @@
   }
 }
 
+// Flex mixins
+
 @mixin flex-v-center {
   display: flex;
   align-items: center;
@@ -36,4 +38,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+// Font mixin
+@mixin font($size) {
+  font-size: var(--#{$size});
+  line-height: var(--#{$size}-lh);
 }

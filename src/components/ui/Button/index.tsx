@@ -5,7 +5,7 @@ import './Button.scss';
 type ButtonProps = {
 	className: string;
 	color: string;
-	background: string;
+	background?: string;
 	children?: React.ReactNode | React.ReactNode | string;
 	onClick?: () => void;
 	borderRadius: string;
@@ -19,7 +19,7 @@ export const Button: React.FC<ButtonProps> = ({
 	children,
 	onClick,
 	borderRadius,
-	padding = '10px 18px',
+	padding,
 }) => {
 	return (
 		<button

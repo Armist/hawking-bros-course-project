@@ -1,7 +1,7 @@
 import React from 'react';
 import {createBrowserRouter} from 'react-router-dom';
-import {Container} from '../components/Container';
 import {MainPage} from '../pages/MainPage';
+import {NotFoundPage} from '../pages/NotFoundPage';
 import {DefaultLayout} from './layouts/DefaultLayout';
 
 export const router = createBrowserRouter([
@@ -15,11 +15,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: '*',
-				element: (
-					<Container>
-						<h1>Error</h1>
-					</Container>
-				),
+				element: <NotFoundPage />,
 			},
 		],
 	},

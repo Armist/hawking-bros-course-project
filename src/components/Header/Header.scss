@@ -53,6 +53,18 @@
 		margin-right: 40px;
 	}
 
+	&:first-child {
+		a {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			svg	{
+				margin-left: 11px;
+			}
+		}
+	}
+
 	&:last-child {
 		a {
 			color: var(--text-violet);

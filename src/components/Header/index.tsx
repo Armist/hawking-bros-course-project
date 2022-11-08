@@ -1,18 +1,19 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, {useState} from 'react';
+
+import type {Location} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
+import {Dropdown, DropdownItem} from '../ui/Dropdown';
+import {BiHeart} from 'react-icons/bi';
+
+import {topNavigationItems, bottomNavigationItems} from '../../data/NavData';
+import {NavigationItem} from './NavigationList/index';
 import {Container} from '../Container';
 import {Logo} from '../ui/Logo';
 import {NavigationList} from './NavigationList';
 import {Button} from '../ui/Button';
-import {LinkType} from '../../types';
 
 import './Header.scss';
-import type {Location} from 'react-router-dom';
-import {Link, useLocation} from 'react-router-dom';
-import {Dropdown, DropdownItem} from '../ui/Dropdown';
-
-import {topNavigationItems, bottomNavigationItems} from '../../data/NavData';
-import {NavigationItem} from './NavigationList/index';
 
 export const Header = () => {
 	const [droppable, setDroppable] = useState(false);
@@ -28,6 +29,13 @@ export const Header = () => {
 	const location: Location = useLocation();
 
 	const getPathText = (path: string) => {
+		let splittedPath = path.split('/');
+		let newPath = '';
+
+		if (splittedPath[1] === 'flats') {
+			newPath = `/${splittedPath[1]}/${splittedPath[2]}`;
+		} else newPath = '/';
+
 		return {
 			'/': 'Квартиры на сутки',
 			'/flats/minsk': 'Квартиры в Минске',
@@ -36,7 +44,7 @@ export const Header = () => {
 			'/flats/vitebsk': 'Квартиры в Витебске',
 			'/flats/grodno': 'Квартиры в Гродно',
 			'/flats/mogilyov': 'Квартиры в Могилеве',
-		}[path];
+		}[newPath];
 	};
 
 	return (
@@ -71,10 +79,13 @@ export const Header = () => {
 
 						<div className="top-navigation__right">
 							<span className="top-navigation__right-item">
-								<a href="#">Закладки</a>
+								<Link to={'liked'}>
+									Закладки
+									<BiHeart size={16} />
+								</Link>
 							</span>
 							<span className="top-navigation__right-item">
-								<a href="#">Вход и регистрация</a>
+								<Link to={'/auth'}>Вход и регистрация</Link>
 							</span>
 						</div>
 					</div>
@@ -95,7 +106,11 @@ export const Header = () => {
 									key={item.text}
 								>
 									{!item.dropdownItems ? (
-										<Link to={item.path} className="item-link">
+										<Link
+											to={item.path}
+											className="item-link"
+											onMouseEnter={closeDropdown}
+										>
 											{item.iconPosition === 'left'
 												? item.icon
 													? item.icon

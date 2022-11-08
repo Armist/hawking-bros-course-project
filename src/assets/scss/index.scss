@@ -10,8 +10,6 @@
 
 body {
 	font-family: var(--font-family);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 	height: 100vh;
 	min-height: 100%;
 }
@@ -40,4 +38,8 @@ button {
 	background-color: inherit;
 	transition: var(--transition);
 	cursor: pointer;
+}
+
+svg {
+	fill: currentColor;
 }

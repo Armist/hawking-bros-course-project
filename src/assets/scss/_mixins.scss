@@ -1,47 +1,53 @@
 @mixin mobile {
-  @media (max-width: 414px) {
-    @content;
-  }
+	@media (max-width: 414px) {
+		@content;
+	}
 }
 
 @mixin tablet {
-  @media (max-width: 834px) {
-    @content;
-  }
+	@media (max-width: 834px) {
+		@content;
+	}
+}
+
+@mixin small-desctop {
+	@media (max-width: 1220px) {
+		@content;
+	}
 }
 
 @mixin desctop {
-  @media (max-width: 1440px) {
-    @content;
-  }
+	@media (max-width: 1440px) {
+		@content;
+	}
 }
 
 // Flex mixins
 
 @mixin flex-v-center {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 @mixin flex-h-center {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 @mixin flex-all-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 @mixin flex-all-sb {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 // Font mixin
 @mixin font($size) {
-  font-size: var(--#{$size});
-  line-height: var(--#{$size}-lh);
+	font-size: var(--#{$size});
+	line-height: var(--#{$size}-lh);
 }

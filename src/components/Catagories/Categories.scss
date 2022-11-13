@@ -1,0 +1,35 @@
+.categories {
+}
+
+.categories__inner {
+	display: flex;
+	flex-direction: row;
+}
+
+.categories__cards {
+	max-width: 953px;
+	height: 400px;
+	width: 100%;
+	margin-right: 30px;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	grid-template-areas:
+		'B B B L L'
+		'L L B B B ';
+	grid-gap: 30px;
+}
+
+.categories__card {
+	grid-column: span 2;
+	background-color: #000;
+}
+
+.categories__card-big {
+	grid-column: span 3;
+	background-color: red;
+}
+
+.categories__columns {
+	max-width: 300px;
+}

@@ -6,7 +6,7 @@ import './Dropdown.scss';
 
 type DropdownItemProps = {
 	children: React.ReactNode | React.ReactNode[] | string;
-	onClick: () => void;
+	onClick?: () => void;
 	padding?: string;
 };
 

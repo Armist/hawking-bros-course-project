@@ -1,9 +1,9 @@
 .dropdown {
 	position: absolute;
 	left: 0;
-	top: 0;
-	z-index: 100;
-	margin-top: 46px;
+	top: 100%;
+	z-index: 100000000;
+	margin-top: 24px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -14,7 +14,7 @@
 	width: 248px;
 	opacity: 1;
 	visibility: visible;
-	transition: visibility 0s, opacity 0.3s linear;
+	transition: visibility 0s, opacity 0s linear;
 }
 
 .dropdown__item {
@@ -33,6 +33,11 @@
 	&:last-child {
 		border-radius: 0 0 10px 10px;
 	}
+}
+
+.dropdown__item a {
+	@include font(m);
+	font-weight: 500;
 }
 
 .dropdown-hidden {

@@ -1,176 +1,156 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import type {Location} from 'react-router-dom';
-import {Link, useLocation} from 'react-router-dom';
-import {Dropdown, DropdownItem} from '../ui/Dropdown';
-import {BiHeart} from 'react-icons/bi';
-
-import {topNavigationItems, bottomNavigationItems} from '../../data/NavData';
-import {NavigationItem} from './NavigationList/index';
-import {Container} from '../Container';
-import {Logo} from '../ui/Logo';
-import {NavigationList} from './NavigationList';
-import {Button} from '../ui/Button';
+import {useAppDispatch, useAppSelector} from '../../hooks/redux';
+import {fetchCities} from '../../store/reducers/ActionCreators';
 
 import './Header.scss';
+import {Link, NavLink} from 'react-router-dom';
+
+import {CgMenuRight, CgClose, CgHeart} from 'react-icons/cg';
+
+import {Logo} from '../ui/Logo';
+import {Container} from '../Container';
+import {
+	topNavigationItems,
+	bottomNavigationItems,
+} from '../../utils/data/HeaderNavigationData';
+import {Button} from '../ui/Button';
+import {Dropdown, DropdownItem} from '../ui/Dropdown';
 
 export const Header = () => {
-	const [droppable, setDroppable] = useState(false);
+	const dispatch = useAppDispatch();
+	const {cities, isLoading, error} = useAppSelector(
+		(state) => state.cityReducer,
+	);
 
+	const [dropped, setDropped] = useState<boolean>(false);
+	const [opened, setOpened] = useState<boolean>(false);
+	const [shown, setShown] = useState<boolean>(false);
 	const closeDropdown = () => {
-		setDroppable(false);
+		setDropped(false);
 	};
 
 	const openDropdown = () => {
-		setDroppable(true);
-	};
-
-	const location: Location = useLocation();
-
-	const getPathText = (path: string) => {
-		let splittedPath = path.split('/');
-		let newPath = '';
-
-		if (splittedPath[1] === 'flats') {
-			newPath = `/${splittedPath[1]}/${splittedPath[2]}`;
-		} else newPath = '/';
-
-		return {
-			'/': 'Квартиры на сутки',
-			'/flats/minsk': 'Квартиры в Минске',
-			'/flats/gomel': 'Квартиры в Гомеле',
-			'/flats/brest': 'Квартиры в Бресте',
-			'/flats/vitebsk': 'Квартиры в Витебске',
-			'/flats/grodno': 'Квартиры в Гродно',
-			'/flats/mogilyov': 'Квартиры в Могилеве',
-		}[newPath];
+		setDropped(true);
 	};
 
 	return (
-		<header className="header">
-			<nav className="top-navigation">
+		<header className={`header ${opened ? 'header-opened' : ''}`}>
+			<nav className="navbar top-navbar">
 				<Container>
-					<div className="top-navigation__inner">
-						<NavigationList listClass="top-navigation__left">
+					<div className="navbar__inner">
+						<ul className="navbar__list">
 							{topNavigationItems.map((item) => (
-								<NavigationItem
-									className={`top-navigation__left-item ${
-										item.iconPosition ? item.iconPosition + '-icon' : ''
-									}`}
-									key={item.text}
-								>
-									<Link to={item.path}>
-										{item.iconPosition === 'left'
-											? item.icon
-												? item.icon
-												: ''
-											: ''}
-										<span>{item.text}</span>
-										{item.iconPosition === 'right'
-											? item.icon
-												? item.icon
-												: ''
-											: ''}
-									</Link>
-								</NavigationItem>
+								<li className="navbar__item top-navbar__item" key={item.id}>
+									<NavLink to={item.path} className="navbar__link">
+										{item.icon && item.icon} {item.title}
+									</NavLink>
+								</li>
 							))}
-						</NavigationList>
-
-						<div className="top-navigation__right">
-							<span className="top-navigation__right-item">
-								<Link to={'liked'}>
-									Закладки
-									<BiHeart size={16} />
-								</Link>
-							</span>
-							<span className="top-navigation__right-item">
-								<Link to={'/auth'}>Вход и регистрация</Link>
-							</span>
+						</ul>
+						<div className="navbar__buttons">
+							<Link to={'/'} className="navbar__button">
+								Закладки <CgHeart size={16} />
+							</Link>
+							<Link to={'/'} className="navbar__button">
+								<span>Вход и регистрация</span>
+							</Link>
 						</div>
 					</div>
 				</Container>
 			</nav>
-			<nav className="bottom-navigation">
+			<nav className="navbar bottom-navbar">
 				<Container>
-					<div className="bottom-navigation__inner">
-						<Logo />
-
-						<NavigationList listClass="bottom-navigation__list">
+					<div className="navbar__inner">
+						<Logo position="header" />
+						<ul className="navbar__list bottom-navbar__list">
 							{bottomNavigationItems.map((item) => (
-								<NavigationItem
-									className={`bottom-navigation__list-item ${
-										item.iconPosition ? item.iconPosition + '-icon' : ''
-									}`}
-									isRelative={Boolean(item.dropdownItems)}
-									key={item.text}
-								>
-									{!item.dropdownItems ? (
-										<Link
-											to={item.path}
-											className="item-link"
-											onMouseEnter={closeDropdown}
-										>
-											{item.iconPosition === 'left'
-												? item.icon
-													? item.icon
-													: ''
-												: ''}
-											<span>{item.text}</span>
-											{item.iconPosition === 'right'
-												? item.icon
-													? item.icon
-													: ''
-												: ''}
-										</Link>
-									) : (
-										<>
-											<div
-												className={`item-link ${
-													droppable ? 'item-link-hovered' : ''
-												}`}
-												onMouseEnter={openDropdown}
-											>
-												{item.iconPosition === 'left'
-													? item.icon
-														? item.icon
-														: ''
-													: ''}
-												<span>{getPathText(location.pathname)}</span>
-												{item.iconPosition === 'right'
-													? item.icon
-														? item.icon
-														: ''
-													: ''}
-											</div>
-											<Dropdown
-												isShown={droppable}
-												onMouseLeave={closeDropdown}
-											>
-												{item.dropdownItems.map((dropdownItem) => (
-													<DropdownItem
-														key={dropdownItem.text}
-														onClick={closeDropdown}
-													>
-														<Link to={`${item.path}/${dropdownItem.path}`}>
-															{dropdownItem.text}
-														</Link>
-													</DropdownItem>
-												))}
-											</Dropdown>
-										</>
+								<li className="navbar__item bottom-navbar__item" key={item.id}>
+									<NavLink
+										to={item.path}
+										className="navbar__link"
+										onMouseEnter={item.childs ? openDropdown : undefined}
+									>
+										{item.title} {item.icon && item.icon}
+									</NavLink>
+									{item.childs && (
+										<Dropdown isShown={dropped} onMouseLeave={closeDropdown}>
+											{item.childs.map((child) => (
+												<DropdownItem key={child.id}>
+													<Link to={child.path}>{child.title}</Link>
+												</DropdownItem>
+											))}
+										</Dropdown>
 									)}
-								</NavigationItem>
+								</li>
 							))}
-						</NavigationList>
-
+						</ul>
+						<Button className="navbar__button-bordered">
+							+ Разместить объявление
+						</Button>
 						<Button
-							className="bottom-navigation__button"
-							color="white"
-							background="linear-gradient(90deg, #9d94ff 0%, #6b50e9 94.5%)"
-							borderRadius="19px"
+							className="burger"
+							onClick={() => {
+								setOpened(!opened);
+							}}
 						>
-							<span>+ Разместить объявление</span>
+							{!opened ? (
+								<CgMenuRight size={18} color={'var(--text-black)'} />
+							) : (
+								<CgClose size={18} />
+							)}
+						</Button>
+					</div>
+				</Container>
+			</nav>
+			<nav
+				className={`adaptive-navbar ${opened ? 'adaptive-navbar-open' : ''}`}
+			>
+				<Container>
+					<div className="adaptive-navbar__inner">
+						<div className="navbar__buttons">
+							<Link to={'/liked'} className="navbar__button">
+								Закладки <CgHeart size={16} />
+							</Link>
+							<Link to={'/login'} className="navbar__button">
+								<span>Вход и регистрация</span>
+							</Link>
+						</div>
+						<ul className="navbar__list">
+							{topNavigationItems.map((item) => (
+								<li className="navbar__item" key={item.id}>
+									<NavLink to={item.path} className="navbar__link">
+										{item.icon && item.icon} {item.title}
+									</NavLink>
+								</li>
+							))}
+							{bottomNavigationItems.map((item) => (
+								<li className="navbar__item" key={item.id}>
+									<Button
+										className={`navbar__link ${
+											item.childs ? 'navbar__link-parent' : ''
+										} ${shown ? 'clicked' : ''}`}
+										onClick={() => {
+											setShown(!shown);
+										}}
+									>
+										{item.title} {item.icon && item.icon}
+									</Button>
+									{item.childs && shown && (
+										<ul className="cities__list">
+											{item.childs.map((child) => (
+												<li key={child.id} className="cities__item">
+													<Link to={child.path}>{child.title}</Link>
+												</li>
+											))}
+										</ul>
+									)}
+								</li>
+							))}
+						</ul>
+						<Button className="navbar__button-bordered">
+							+ Разместить объявление
 						</Button>
 					</div>
 				</Container>

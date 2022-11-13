@@ -3,13 +3,23 @@ export type LinkType = {
 	text: string;
 	icon?: React.ReactNode;
 	iconPosition?: 'left' | 'right';
-	dropdownItems?: LinkType[]
+	dropdownItems?: LinkType[];
 };
-
-
 
 export type IconType = {
 	width: number;
 	height: number;
 	fill?: string;
+};
+
+export type District = {
+	id: number;
+	name: string;
+};
+
+export type City = {
+	id: number;
+	name: string;
+	path: string;
+	districts?: District[];
 };

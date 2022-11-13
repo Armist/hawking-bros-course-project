@@ -1,6 +1,7 @@
 :root {
 	--font-family: 'Inter', sans-serif;
 	--container-width: 1280px;
+	--container-offset: 16px;
 
 	// Border radius
 	--xs-radius: 5px;
@@ -15,7 +16,9 @@
 	--text-gray: #8291a3;
 	--text-black: #1e2123;
 	--text-violet: #664ef9;
+	--text-violet-darken: #5C35F9;
 	--text-white: #ffffff;
+	--text-red: #EB5757;
 
 	--bg-light-gray: #f8f8f8;
 	--bg-white: #ffffff;
@@ -48,5 +51,5 @@
 	--xxxxxl-lh: 73px;
 
 	// TRANSITION
-	--transition: all 0.3s linear;
+	--transition: all 0.3s ease-in-out;
 }

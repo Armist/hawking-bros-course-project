@@ -1,0 +1,130 @@
+.navbar {
+}
+
+.top-navbar {
+  background-color: var(--bg-light-gray);
+  color: var(--text-gray);
+
+  @media (max-width: 992px) {
+    display: none;
+  }
+}
+
+.top-navbar__inner {
+  height: 40px;
+}
+
+.bottom-navbar {
+  font-weight: 600;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  color: var(--text-black);
+  @media (max-width: 992px) {
+    box-shadow: none;
+  }
+
+  .navbar__button-bordered {
+    @media (max-width: 992px) {
+      display: none;
+    }
+  }
+}
+
+.bottom-navbar__inner {
+  height: 60px;
+}
+
+.navbar__inner {
+  @include flex-all-sb;
+}
+
+.adaptive-navbar {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  transition: all 0.05s ease-out;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  padding-top: 24px;
+  background-color: #fff;
+  max-height: 0;
+
+  &-open {
+    display: flex;
+    opacity: 1;
+    max-height: none;
+  }
+}
+
+.adaptive-navbar__inner {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s linear;
+  z-index: 1;
+
+  .navbar__buttons {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+
+    .navbar__button {
+      width: 100%;
+      margin-right: 0;
+      @include flex-all-center;
+      margin-bottom: 16px;
+
+      &:first-child {
+        color: var(--text-red);
+      }
+    }
+  }
+
+  .navbar__list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+
+  .navbar__item {
+    margin-bottom: 12px;
+    width: 100%;
+    @include flex-all-center;
+    flex-direction: column;
+  }
+
+  .navbar__link {
+    padding: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+
+    svg {
+      transition: var(--transition);
+      margin: 0 6px;
+    }
+  }
+
+  .navbar__link-parent.clicked {
+    svg {
+      transition: var(--transition);
+      transform: rotate(180deg);
+    }
+  }
+
+  .cities__list {
+    margin-top: 12px;
+  }
+
+  .cities__item {
+    margin-bottom: 16px;
+
+    a {
+      text-align: center;
+      @include flex-all-center;
+    }
+  }
+
+  .navbar__button-bordered {
+    align-self: center;
+    margin-bottom: 36px;
+  }
+}

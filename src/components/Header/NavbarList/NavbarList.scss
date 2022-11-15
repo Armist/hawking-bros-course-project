@@ -1,0 +1,9 @@
+.navbar__list {
+  @include flex-all-sb;
+}
+
+.bottom-navbar__list {
+  @media (max-width: 992px) {
+    display: none;
+  }
+}
